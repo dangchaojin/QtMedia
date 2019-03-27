@@ -1,0 +1,14 @@
+/debug/*
+!/debug/QtMedia.exe
+release/
+*.user
+*.stash
+*.Debug
+*.Release
+Makefile
+
+#假设我们只有过滤规则，而没有添加规则，那么我们就需要把/mtk/目录下
+#除了one.txt以外的所有文件都写出来！
+
+#注意上面的/mtk/*不能写为/mtk/，否则父目录被前面的
+#规则排除掉了，one.txt文件虽然加了!过滤规则，也不会生效！
