@@ -24,6 +24,11 @@ public:
     ~CameraWidget();
 
     void TranslateLanguage();
+    void sendSignals();
+
+protected:
+
+private:
 
 
 private slots:
@@ -31,17 +36,25 @@ private slots:
     void SaveImage();
     void DisplayImage(int, QImage image);
 
+signals:
+    void mySignal();
+    void mySignalParm(int, QString);
+
+public:
+
+protected:
 
 private:
     QCamera *camera;
     QCameraViewfinder *viewFinder;
     QCameraImageCapture *cameraImageCapture;
 
-    QLabel *label;
+    QLabel *showLabel;
 
-    QPushButton *captureButton;
-    QPushButton *saveButton;
-    QPushButton *exitButton;
+    QPushButton *captureBtn;
+    QPushButton *saveBtn;
+    QPushButton *exitBtn;
+    QPushButton *exitToMainWidgetBtn;
 
     QHBoxLayout *hBoxLayout;
     QVBoxLayout *vBoxLayout;

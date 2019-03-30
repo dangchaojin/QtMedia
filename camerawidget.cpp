@@ -11,19 +11,22 @@ CameraWidget::CameraWidget(QWidget *parent) : QWidget(parent)
     viewFinder = new QCameraViewfinder();     //摄像取景器
     cameraImageCapture = new QCameraImageCapture(camera);
 
-    label = new QLabel();
-    label->setFixedSize(350, 350);
+    showLabel = new QLabel();
+    showLabel->setFixedSize(350, 350);
+    showLabel->setScaledContents(true);    //缩放内容！！
 
-    captureButton = new QPushButton();
-    saveButton = new QPushButton();
-    saveButton->setDisabled(true);
-    exitButton = new QPushButton();
+    captureBtn = new QPushButton();
+    saveBtn = new QPushButton();
+    saveBtn->setDisabled(true);
+    exitBtn = new QPushButton();
+    exitToMainWidgetBtn = new QPushButton();
 
-    vBoxLayout->addWidget(label);
+    vBoxLayout->addWidget(showLabel);
     vBoxLayout->addStretch(1);
-    vBoxLayout->addWidget(captureButton);
-    vBoxLayout->addWidget(saveButton);
-    vBoxLayout->addWidget(exitButton);
+    vBoxLayout->addWidget(captureBtn);
+    vBoxLayout->addWidget(saveBtn);
+    vBoxLayout->addWidget(exitBtn);
+    vBoxLayout->addWidget(exitToMainWidgetBtn);
 
     hBoxLayout->addWidget(viewFinder);
     hBoxLayout->addStretch(1);
@@ -36,10 +39,16 @@ CameraWidget::CameraWidget(QWidget *parent) : QWidget(parent)
 
     QObject::connect(this->cameraImageCapture, SIGNAL(imageCaptured(int, QImage)), this, SLOT(DisplayImage(int, QImage)));
 
-    QObject::connect(this->captureButton, SIGNAL(clicked()), this, SLOT(CaptureImage()));
-    QObject::connect(this->saveButton, SIGNAL(clicked()), this, SLOT(SaveImage()));
-    QObject::connect(this->exitButton, SIGNAL(clicked()), this, SLOT(close()));
+    QObject::connect(this->captureBtn, SIGNAL(clicked()), this, SLOT(CaptureImage()));
+    QObject::connect(this->saveBtn, SIGNAL(clicked()), this, SLOT(SaveImage()));
+    QObject::connect(this->exitBtn, SIGNAL(clicked()), this, SLOT(close()));
 
+    //欲使信号直接驱动非槽函数，可以这样做！！！！！！
+    //QObject::connect(exitToMainWidgetBtn, SIGNAL(clicked()), this, SLOT(sendSignals()));
+    QObject::connect(exitToMainWidgetBtn, &QPushButton::clicked, this, &CameraWidget::sendSignals);
+
+//    cameraImageCapture->setCaptureDestination(QCameraImageCapture::CaptureToFile);
+//    camera->setCaptureMode(QCamera::CaptureStillImage);
     camera->setViewfinder(viewFinder);
     camera->start();
 }
@@ -47,24 +56,29 @@ CameraWidget::CameraWidget(QWidget *parent) : QWidget(parent)
 CameraWidget::~CameraWidget()
 {
     //QObject及其派生类的对象，如果其parent非0，那么其parent析构时会析构该对象。
-    if (nullptr != exitButton)
+    if (nullptr != exitToMainWidgetBtn)
     {
-        delete exitButton;
+        delete exitToMainWidgetBtn;
+    }
+
+    if (nullptr != exitBtn)
+    {
+        delete exitBtn;
     }
     //#define NULL ((void *)0)     所以用nullptr
-    if (nullptr != saveButton)
+    if (nullptr != saveBtn)
     {
-        delete saveButton;
+        delete saveBtn;
     }
 
-    if (nullptr != captureButton)
+    if (nullptr != captureBtn)
     {
-        delete captureButton;
+        delete captureBtn;
     }
 
-    if (nullptr != label)
+    if (nullptr != showLabel)
     {
-        delete label;
+        delete showLabel;
     }
 
     if (nullptr != cameraImageCapture)
@@ -98,16 +112,23 @@ CameraWidget::~CameraWidget()
 void CameraWidget::TranslateLanguage() //TranslateLanguage
 {
     this->setWindowTitle("TestCapture");
-    label->setText("Waiting to Capture ...");
-    captureButton->setText("capture");
-    saveButton->setText("save");
-    exitButton->setText("exit");
+    showLabel->setText("Waiting to Capture ...");
+    captureBtn->setText("Capture");
+    saveBtn->setText("Save");
+    exitBtn->setText("Close");
+    exitToMainWidgetBtn->setText("Go Back");
 }
 
-void CameraWidget::DisplayImage(int, QImage image)   //参数用不到可以这样
+void CameraWidget::sendSignals()
+{
+    emit mySignal();
+    emit mySignalParm(300, "已经切换到主窗口");
+}
+
+void CameraWidget::DisplayImage(int, QImage image)   //参数用不到可以这样！！
 {
     qDebug() << "DisplayImage1";
-    label->setPixmap(QPixmap::fromImage(image));
+    showLabel->setPixmap(QPixmap::fromImage(image));
     qDebug() << "DisplayImage2";
 
     return;
@@ -115,9 +136,9 @@ void CameraWidget::DisplayImage(int, QImage image)   //参数用不到可以这�
 
 void CameraWidget::CaptureImage()
 {
-    if (!saveButton->isEnabled())
+    if (!saveBtn->isEnabled())
     {
-        saveButton->setEnabled(true);
+        saveBtn->setEnabled(true);
         //saveButton->setDisabled(false);
     }
 
@@ -134,7 +155,7 @@ void CameraWidget::SaveImage()
     QString fileName = QFileDialog::getSaveFileName(this, tr("保存到文件"), QDir::homePath(), tr("jpg格式文件(*.jpg);;png格式文件(*.png)"));
     if( !fileName.isEmpty() )
     {
-        const QPixmap* pixmap = label->pixmap();
+        const QPixmap* pixmap = showLabel->pixmap();
         if (pixmap)
         {
             pixmap->save(fileName);
