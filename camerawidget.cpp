@@ -1,4 +1,5 @@
 #include "camerawidget.h"
+#include <QDebug>
 
 CameraWidget::CameraWidget(QWidget *parent) : QWidget(parent)
 {

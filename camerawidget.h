@@ -2,7 +2,6 @@
 #define CAMERAWIDGET_H
 
 #include <QWidget>
-#include <QDebug>
 #include <QLabel>
 #include <QPushButton>
 #include <QFileDialog>

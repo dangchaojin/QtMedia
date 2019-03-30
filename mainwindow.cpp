@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
 {
@@ -17,11 +18,13 @@ MainWindow::~MainWindow()
 {
     if (nullptr != cameraButton)
     {
+        qDebug() << "delete cameraButton";
         delete cameraButton;
     }
 
     if (nullptr != hBoxLayout)
     {
+        qDebug() << "delete hBoxLayout";
         delete hBoxLayout;
     }
 }
