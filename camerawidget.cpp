@@ -1,5 +1,4 @@
 #include "camerawidget.h"
-#include <QDebug>
 
 CameraWidget::CameraWidget(QWidget *parent) : QWidget(parent)
 {
@@ -32,7 +31,7 @@ CameraWidget::CameraWidget(QWidget *parent) : QWidget(parent)
     hBoxLayout->addStretch(1);
     hBoxLayout->addLayout(vBoxLayout);
 
-    setLayout(hBoxLayout);
+    this->setLayout(hBoxLayout);
     //QWidget::setGeometry(int ax, int ay, int aw, int ah)
     this->setGeometry(250, 250, 1024, 500);
     this->TranslateLanguage();
@@ -44,8 +43,8 @@ CameraWidget::CameraWidget(QWidget *parent) : QWidget(parent)
     QObject::connect(this->exitBtn, SIGNAL(clicked()), this, SLOT(close()));
 
     //欲使信号直接驱动非槽函数，可以这样做！！！！！！
-    //QObject::connect(exitToMainWidgetBtn, SIGNAL(clicked()), this, SLOT(sendSignals()));
-    QObject::connect(exitToMainWidgetBtn, &QPushButton::clicked, this, &CameraWidget::sendSignals);
+    //QObject::connect(exitToMainWidgetBtn, SIGNAL(clicked()), this, SLOT(sendSignalsToReturnMainWidget()));
+    QObject::connect(exitToMainWidgetBtn, &QPushButton::clicked, this, &CameraWidget::sendSignalsToReturnMainWidget);
 
 //    cameraImageCapture->setCaptureDestination(QCameraImageCapture::CaptureToFile);
 //    camera->setCaptureMode(QCamera::CaptureStillImage);
@@ -113,16 +112,20 @@ void CameraWidget::TranslateLanguage() //TranslateLanguage
 {
     this->setWindowTitle("TestCapture");
     showLabel->setText("Waiting to Capture ...");
-    captureBtn->setText("Capture");
-    saveBtn->setText("Save");
-    exitBtn->setText("Close");
+    captureBtn->setText("Capture Picture");
+    saveBtn->setText("Save Picture");
+    exitBtn->setText("Close Widget");
     exitToMainWidgetBtn->setText("Go Back");
+
+    return;
 }
 
-void CameraWidget::sendSignals()
+void CameraWidget::sendSignalsToReturnMainWidget()
 {
     emit mySignal();
-    emit mySignalParm(300, "已经切换到主窗口");
+    emit mySignalParm(1, "已经从CameraWidget切换到主窗口");   //1表示为CameraWidget发过去的
+
+    return;
 }
 
 void CameraWidget::DisplayImage(int, QImage image)   //参数用不到可以这样！！

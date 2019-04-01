@@ -26,11 +26,14 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    camerawidget.cpp
+    camerawidget.cpp \
+    choosepicwidget.cpp
 
 HEADERS += \
         mainwindow.h \
-    camerawidget.h
+    camerawidget.h \
+    choosepicwidget.h \
+    common.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

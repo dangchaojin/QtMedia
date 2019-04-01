@@ -1,11 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QWidget>
-#include <QPushButton>
-#include <QVBoxLayout>
-
 #include "camerawidget.h"
+#include "choosepicwidget.h"
 
 class MainWindow : public QWidget
 {
@@ -25,7 +22,7 @@ private:
  * 类型，顺序必须要和对应的信号保持一致。另外，槽函数的参数不能有缺省值。
  * 由于信号的返回值为void, 槽必须和信号的返回值保持一致, 因此槽的返回值为void      */
 public slots:
-    void myBtnReleasedSlot();
+    void choosePicture();
     void goCameraWidget();
     void returnMainWidget();
     void returnMainWidgetParm(int, QString);
@@ -46,11 +43,12 @@ private:
     QVBoxLayout *vBoxLayout;
 
     QPushButton *exitBtn;
-    QPushButton *toDoBtn;
+    QPushButton *choosePicBtn;
     QPushButton *cameraBtn;
     QPushButton *countBtn;
 
     CameraWidget *cameraWidget;
+    ChoosePicWidget *pictureWidget;
 
     int count = 0;
 };

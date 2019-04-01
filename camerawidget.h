@@ -1,19 +1,7 @@
 #ifndef CAMERAWIDGET_H
 #define CAMERAWIDGET_H
 
-#include <QWidget>
-#include <QLabel>
-#include <QPushButton>
-#include <QFileDialog>
-#include <QMessageBox>
-
-#include <QCamera>
-#include <QCameraImageCapture>
-#include <QCameraViewfinder>
-//在使用QCamera相关的类时，一定要加入: QT += multimedia multimediawidgets
-
-#include <QHBoxLayout>
-//#include <QVBoxLayout>
+#include "common.h"
 
 class CameraWidget : public QWidget
 {
@@ -24,7 +12,7 @@ public:
     ~CameraWidget();
 
     void TranslateLanguage();
-    void sendSignals();
+    void sendSignalsToReturnMainWidget();
 
 protected:
 
