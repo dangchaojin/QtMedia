@@ -10,8 +10,12 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     countBtn = new QPushButton();
     exitBtn = new QPushButton();
 
-    //目前cameraWidget是连同mainWidget创建而一起创建
-    //后续看看可不可以放到goCameraWidget()中构造？？？？？？？？？？？
+    //后续任务：
+
+    //1、使窗口等比缩放拉伸！！！！！！！！
+
+    //2、目前cameraWidget是连同mainWidget创建而一起创建
+    //   后续看看可不可以放到goCameraWidget()中构造？？？？？？？？？？？
     cameraWidget = new CameraWidget();
 
     vBoxLayout->addWidget(cameraBtn);
