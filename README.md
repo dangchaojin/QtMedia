@@ -1,5 +1,14 @@
 a Demo of QtCamera
 
+	//mainwindow.cpp中写着
+    //后续任务：
+
+    //1、使窗口等比缩放拉伸！！！！！！！！
+
+    //2、目前cameraWidget是连同mainWidget创建而一起创建
+    //   后续看看可不可以放到goCameraWidget()中构造？？？？？？？？？？？
+
+
 如需直接运行，到Qt5.12.0\5.12.0\mingw73_64\bin中拷贝以下几个动态链接库文件：
 
 Qt5Guid.dll
