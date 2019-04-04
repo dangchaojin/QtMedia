@@ -10,7 +10,11 @@ ChoosePicWidget::ChoosePicWidget(QWidget *parent) : QWidget(parent)
     exitToMainWidgetBtn = new QPushButton();
 
     displayPicLabel = new QLabel();
+    //displayPicLabel->setFixedSize(350, 350);
 
+    displayOpenFileName = new QLineEdit();
+
+    vBoxLayout->addWidget(displayOpenFileName);
     vBoxLayout->addWidget(choosePicBtn);
     vBoxLayout->addWidget(exitBtn);
     vBoxLayout->addWidget(exitToMainWidgetBtn);
@@ -34,6 +38,11 @@ ChoosePicWidget::ChoosePicWidget(QWidget *parent) : QWidget(parent)
 
 ChoosePicWidget::~ChoosePicWidget()
 {
+    if (nullptr != displayOpenFileName)
+    {
+        delete displayOpenFileName;
+    }
+
     if (nullptr != displayPicLabel)
     {
         delete displayPicLabel;
@@ -73,6 +82,8 @@ void ChoosePicWidget::TranslateLanguage()
 
     displayPicLabel->setText("Waiting to Choose Picture ...");
 
+    displayOpenFileName->setText("Waiting to Choose Picture ...");
+
     return;
 }
 
@@ -86,15 +97,24 @@ void ChoosePicWidget::sendSignalsToReturnMainWidget()
 
 void ChoosePicWidget::choosePicture()
 {
-    //QString fileName = QFileDialog::getSaveFileName(this, tr("保存到文件"), QDir::homePath(), tr("jpg格式文件(*.jpg);;png格式文件(*.png)"));
-    if( 1 )
+    QString fileName = QFileDialog::getOpenFileName(this, tr("打开文件"), QDir::homePath(), tr("jpg格式文件(*.jpg);;png格式文件(*.png);;所有文件(*.*)"));
+    if( fileName.isEmpty() )
     {
-        //
+        qDebug() << "fileName is Empty";
+        QMessageBox messageBox(QMessageBox::NoIcon, "Fail", "Open fail!");
+        messageBox.exec();
+        return;
     }
-    else
-    {
-        //
-    }
+
+    qDebug() << "choosePicture: " << fileName;
+    displayOpenFileName->setText(fileName);
+
+//    //显示gif可以用这个
+//    QMovie *movie = new QMovie(fileName);
+//    displayPicLabel->setMovie(movie);
+
+    //displayPicLabel->setPicture(QPicture);
+
 
     return;
 }

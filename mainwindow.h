@@ -42,10 +42,10 @@ protected:
 private:
     QVBoxLayout *vBoxLayout;
 
-    QPushButton *exitBtn;
-    QPushButton *choosePicBtn;
     QPushButton *cameraBtn;
+    QPushButton *choosePicBtn;
     QPushButton *countBtn;
+    QPushButton *exitBtn;
 
     CameraWidget *cameraWidget;
     ChoosePicWidget *pictureWidget;

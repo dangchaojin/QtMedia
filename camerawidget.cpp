@@ -132,7 +132,6 @@ void CameraWidget::DisplayImage(int, QImage image)   //参数用不到可以这�
 {
     qDebug() << "DisplayImage1";
     showLabel->setPixmap(QPixmap::fromImage(image));
-    qDebug() << "DisplayImage2";
 
     return;
 }
@@ -176,7 +175,6 @@ void CameraWidget::SaveImage()
         QMessageBox messageBox(QMessageBox::NoIcon, "Save Fail", "FileName is empty!");
         //messageBox.setIconPixmap(QPixmap("icon.png"));
         messageBox.exec();
-        //return;
     }
 
     return;

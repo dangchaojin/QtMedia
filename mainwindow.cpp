@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     QObject::connect(exitBtn, SIGNAL(clicked()), this, SLOT(close()));
 
     QObject::connect(choosePicBtn, SIGNAL(released()), this, SLOT(choosePicture()));
-    QObject::connect(choosePicBtn, SIGNAL(released()), exitBtn, SLOT(hide()));
+    //QObject::connect(choosePicBtn, SIGNAL(released()), exitBtn, SLOT(hide()));
 
     QObject::connect(countBtn, SIGNAL(clicked()), this, SLOT(clickedCount()));
 
@@ -113,7 +113,7 @@ void MainWindow::choosePicture()
     this->hide();
     pictureWidget->show();
 
-    return;
+    return;    //这样也可以,不要这一句也可以
 }
 
 void MainWindow::goCameraWidget()

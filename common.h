@@ -7,11 +7,14 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 //#include <QVBoxLayout>
+#include <QLineEdit>
 
 #include <QDebug>
 
 #include <QFileDialog>
 #include <QMessageBox>
+
+//#include <QPicture>
 
 
 //在使用QCamera相关的类时，一定要加入: QT += multimedia multimediawidgets

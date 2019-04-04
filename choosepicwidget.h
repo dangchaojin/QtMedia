@@ -34,6 +34,8 @@ private:
 
     QLabel *displayPicLabel;
 
+    QLineEdit *displayOpenFileName;
+
 };
 
 #endif // CHOOSEPICWIDGET_H
