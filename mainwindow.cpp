@@ -105,7 +105,7 @@ void MainWindow::TranslateLanguage()
 
 void MainWindow::choosePicture()
 {
-    if ( choosePicBtn != nullptr )
+    if ( nullptr != choosePicBtn )
     {
         choosePicBtn->setText(tr("choosePicture..."));
     }
@@ -113,7 +113,7 @@ void MainWindow::choosePicture()
     this->hide();
     pictureWidget->show();
 
-    return;    //这样也可以,不要这一句也可以
+    return;    //这样也可以,不要这一句也可以！！！！
 }
 
 void MainWindow::goCameraWidget()

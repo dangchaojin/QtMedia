@@ -152,7 +152,7 @@ void CameraWidget::CaptureImage()
     return;
 }
 
-void CameraWidget::SaveImage()
+/*void CameraWidget::SaveImage()
 {
     QString fileName = QFileDialog::getSaveFileName(this, tr("保存到文件"), QDir::homePath(), tr("jpg格式文件(*.jpg);;png格式文件(*.png)"));
     if( !fileName.isEmpty() )
@@ -174,6 +174,33 @@ void CameraWidget::SaveImage()
     {
         QMessageBox messageBox(QMessageBox::NoIcon, "Save Fail", "FileName is empty!");
         //messageBox.setIconPixmap(QPixmap("icon.png"));
+        messageBox.exec();
+    }
+
+    return;
+}*/
+
+void CameraWidget::SaveImage()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("保存到文件"), QDir::homePath(), tr("jpg格式文件(*.jpg);;png格式文件(*.png)"));
+    if( fileName.isEmpty() )
+    {
+		QMessageBox messageBox(QMessageBox::NoIcon, "Save Fail", "FileName is empty!");
+        //messageBox.setIconPixmap(QPixmap("icon.png"));
+        messageBox.exec();
+		return;    //!!!!注意  其他的类似这个if的情况，避免此时错误执行后面的代码
+    }
+	
+    const QPixmap* pixmap = showLabel->pixmap();
+    if (pixmap)
+    {
+        pixmap->save(fileName);
+        QMessageBox messageBox(QMessageBox::NoIcon, "Succeed", "Save succeed!");
+        messageBox.exec();
+    }
+    else
+    {
+        QMessageBox messageBox(QMessageBox::NoIcon, "Fail", "Save fail!");
         messageBox.exec();
     }
 
