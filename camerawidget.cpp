@@ -123,7 +123,7 @@ void CameraWidget::TranslateLanguage() //TranslateLanguage
 void CameraWidget::sendSignalsToReturnMainWidget()
 {
     emit mySignal();
-    emit mySignalParm(1, "已经从CameraWidget切换到主窗口");   //1表示为CameraWidget发过去的
+    emit mySignalParm(SIGNAL_CAMERA_WIDGET, "已经从CameraWidget切换到主窗口");
 
     return;
 }

@@ -28,6 +28,7 @@ private:
     QHBoxLayout *hBoxLayout;
     QVBoxLayout *vBoxLayout;
 
+    QLabel *showTextLabel;
     QPushButton *choosePicBtn;
     QPushButton *exitBtn;
     QPushButton *exitToMainWidgetBtn;

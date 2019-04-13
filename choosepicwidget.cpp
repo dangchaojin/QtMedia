@@ -10,10 +10,13 @@ ChoosePicWidget::ChoosePicWidget(QWidget *parent) : QWidget(parent)
     exitToMainWidgetBtn = new QPushButton();
 
     displayPicLabel = new QLabel();
-    //displayPicLabel->setFixedSize(350, 350);
+
+    showTextLabel = new QLabel();
+    showTextLabel->setFixedSize(350, 350);
 
     displayOpenFileName = new QLineEdit();
 
+    vBoxLayout->addWidget(showTextLabel);
     vBoxLayout->addWidget(displayOpenFileName);
     vBoxLayout->addWidget(choosePicBtn);
     vBoxLayout->addWidget(exitBtn);
@@ -21,6 +24,7 @@ ChoosePicWidget::ChoosePicWidget(QWidget *parent) : QWidget(parent)
 
 
     hBoxLayout->addWidget(displayPicLabel);
+    hBoxLayout->addStretch(1);
     hBoxLayout->addLayout(vBoxLayout);
     this->setLayout(hBoxLayout);
 
@@ -41,6 +45,11 @@ ChoosePicWidget::~ChoosePicWidget()
     if (nullptr != displayOpenFileName)
     {
         delete displayOpenFileName;
+    }
+
+    if (nullptr != showTextLabel)
+    {
+        delete showTextLabel;
     }
 
     if (nullptr != displayPicLabel)
@@ -83,6 +92,7 @@ void ChoosePicWidget::TranslateLanguage()
     displayPicLabel->setText("Waiting to Choose Picture ...");
 
     displayOpenFileName->setText("Waiting to Choose Picture ...");
+    showTextLabel->setText("Attention:---");
 
     return;
 }
@@ -90,7 +100,7 @@ void ChoosePicWidget::TranslateLanguage()
 void ChoosePicWidget::sendSignalsToReturnMainWidget()
 {
     emit mySignal();
-    emit mySignalParm(2, "已经从ChoosePicWidget切换到主窗口");   //2表示为ChoosePicWidget发过去的
+    emit mySignalParm(SIGNAL_CHOOSE_WIDGET, "已经从ChoosePicWidget切换到主窗口");
 
     return;
 }
@@ -113,7 +123,15 @@ void ChoosePicWidget::choosePicture()
 //    QMovie *movie = new QMovie(fileName);
 //    displayPicLabel->setMovie(movie);
 
-    //displayPicLabel->setPicture(QPicture);
+//    QPicture Picture;        运行不起来---有空再找原因吧
+//    Picture.load(fileName);
+//    displayPicLabel->setPicture(Picture);
+
+    QPixmap pixmap;
+    pixmap.load(fileName);
+    displayPicLabel->setPixmap(pixmap);
+
+    displayPicLabel->setScaledContents(true);   //缩放内容！！这样可使图片填充label
 
 
     return;

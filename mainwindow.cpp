@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     QObject::connect(exitBtn, SIGNAL(clicked()), this, SLOT(close()));
 
     QObject::connect(choosePicBtn, SIGNAL(released()), this, SLOT(choosePicture()));
-    //QObject::connect(choosePicBtn, SIGNAL(released()), exitBtn, SLOT(hide()));
+    //QObject::connect(choosePicBtn, SIGNAL(released()), exitBtn, SLOT(hide()));       //hide PushButton
 
     QObject::connect(countBtn, SIGNAL(clicked()), this, SLOT(clickedCount()));
 
@@ -135,14 +135,14 @@ void MainWindow::returnMainWidget()
 
 void MainWindow::returnMainWidgetParm(int num, QString str)
 {
-    if (num == 1)
+    if (num == SIGNAL_CAMERA_WIDGET)
     {
         qDebug() << "从cameraWidget传回的参数 : " << "num: " << num << " str: " << str.toUtf8().data();
 //        qDebug() << "num: " << num << " str: " << str.toStdString().c_str();
 //        qWarning() << "num: " << num << " str: " << str.toUtf8().data();
 //        qInfo() << "num: " << num << " str: " << str.toUtf8().data();
     }
-    else if (num == 2)
+    else if (num == SIGNAL_CHOOSE_WIDGET)
     {
         qDebug() << "从pictureWidget传回的参数 : " << "num: " << num << " str: " << str.toUtf8().data();
     }

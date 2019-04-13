@@ -1,6 +1,7 @@
 #ifndef COMMON_H
 #define COMMON_H
-
+#define SIGNAL_CAMERA_WIDGET 1
+#define SIGNAL_CHOOSE_WIDGET 2
 
 #include <QWidget>
 #include <QLabel>
@@ -14,8 +15,10 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-//#include <QPicture>
-
+#include <QPicture>
+#include <QPainter>
+//#include <QPicturePaintEngine>
+//#include <QPaintEngine>
 
 //在使用QCamera相关的类时，一定要加入: QT += multimedia multimediawidgets
 #include <QCamera>
