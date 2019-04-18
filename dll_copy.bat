@@ -1,11 +1,14 @@
 @echo off
 ::关闭回显
 
+::测试出一句一句运行的效果
+::pause
+
 title Copying
 echo "使用bat脚本来复制文件夹和文件"
 echo.
+:: echo后可以加双引号，也可以不加
 
-:: call 调用另一个脚本
 :: set SrcPath = "D:\Qt5.12.0\5.12.0\mingw73_64\bin\libgcc_s_seh-1.dll"
 :: 显示乱码的另存为ANSI编码
 :: xcopy 有询问的拷贝
@@ -24,7 +27,6 @@ copy D:\Qt5.12.0\5.12.0\mingw73_64\bin\libwinpthread-1.dll        D:\Test_Code\Q
 copy D:\Qt5.12.0\5.12.0\mingw73_64\bin\libgcc_s_seh-1.dll         D:\Test_Code\QtMedia\debug
 copy D:\Qt5.12.0\5.12.0\mingw73_64\bin\Qt5MultimediaWidgetsd.dll  D:\Test_Code\QtMedia\debug
 
-
 ::  copy第六行中，前后都需要双引号
 
 ::  目录中如果有特殊字符，大部分可以用^这个符号来进行转义，而%就要用%%代替
@@ -35,6 +37,18 @@ copy D:\Qt5.12.0\5.12.0\mingw73_64\bin\Qt5MultimediaWidgetsd.dll  D:\Test_Code\Q
 ::  径是完整的绝对路径，还是不完整的相对路径，如果使用的是相对路径，那么就
 ::  要看看脚本运行目录是否不和相对路径的第一个文件夹在一起。
 
+:: call 调用另一个脚本     cd 切换目录
+
 @echo off
 echo 脚本执行完成
+
+echo if you confirm you are handsome, input ‘y’?
+set /p answer=
+echo your input is ‘%answer%’
+if ‘%answer%’==‘y’ goto B
+::上一行两个地方，双引号或者单引号都可以
+exit
+:B 
+echo handsome
 pause
+

@@ -15,8 +15,8 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-#include <QPicture>
-#include <QPainter>
+//#include <QPicture>
+//#include <QPainter>
 //#include <QPicturePaintEngine>
 //#include <QPaintEngine>
 
