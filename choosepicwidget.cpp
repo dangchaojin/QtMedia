@@ -2,6 +2,8 @@
 
 ChoosePicWidget::ChoosePicWidget(QWidget *parent) : QWidget(parent)
 {
+    qInstallMessageHandler(myMessageOutput);
+
     hBoxLayout = new QHBoxLayout();
     vBoxLayout = new QVBoxLayout();
 

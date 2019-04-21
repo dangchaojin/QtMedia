@@ -27,13 +27,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     camerawidget.cpp \
-    choosepicwidget.cpp
+    choosepicwidget.cpp \
+    printfile.cpp
 
 HEADERS += \
         mainwindow.h \
     camerawidget.h \
     choosepicwidget.h \
-    common.h
+    common.h \
+    printfile.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
