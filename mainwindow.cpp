@@ -15,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
 
     //2、目前cameraWidget是连同mainWidget创建而一起创建
     //   后续看看可不可以放到goCameraWidget()中构造？？？？？？？？？？？
+
+    //3、优化日志模块
+
     cameraWidget = new CameraWidget();
     pictureWidget = new ChoosePicWidget();
 

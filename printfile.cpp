@@ -1,5 +1,6 @@
 #include "printfile.h"
 
+//参考： https://blog.csdn.net/xiaoyink/article/details/79721481
 
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)

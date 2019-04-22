@@ -2,6 +2,7 @@
 #define PRINTFILE_H
 
 #include "common.h"
+#define LOG_FILE_KEEP_NUM 7
 
 //打印到文件
 //不要把全局变量以及全局方法的定义放在头文件里!!!!!

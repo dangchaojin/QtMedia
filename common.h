@@ -27,13 +27,10 @@
 
 
 
-//printfile
 #include <QMutex>
 #include <QDateTime>
-//#include <QMessageLogContext>
 #include <QFile>
 #include <QFileInfo>
-#define LOG_FILE_KEEP_NUM 7
 
 
 
