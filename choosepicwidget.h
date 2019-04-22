@@ -2,6 +2,7 @@
 #define CHOOSEPICWIDGET_H
 
 #include "common.h"
+#include "printfile.h"
 
 class ChoosePicWidget : public QWidget
 {

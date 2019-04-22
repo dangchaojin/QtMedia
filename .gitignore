@@ -1,3 +1,4 @@
+/log
 /debug/*
 !/debug/QtMedia.exe
 release/
