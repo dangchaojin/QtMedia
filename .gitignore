@@ -1,6 +1,6 @@
 /log
 /debug/*
-#!/debug/QtMedia.exe    暂时不提交 .exe，后续将近完善再上传
+!/debug/QtMedia.exe
 release/
 *.user
 *.stash
