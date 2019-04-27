@@ -1,7 +1,13 @@
 #ifndef COMMON_H
 #define COMMON_H
+
 #define SIGNAL_CAMERA_WIDGET 1
 #define SIGNAL_CHOOSE_WIDGET 2
+
+#define AXSIZE 250
+#define AYSIZE 250
+#define AWSIZE 1024
+#define AHSIZE 500
 
 #include <QWidget>
 #include <QLabel>

@@ -2,14 +2,12 @@
 
 ChoosePicWidget::ChoosePicWidget(QWidget *parent) : QWidget(parent)
 {
-    qInstallMessageHandler(myMessageOutput);
-
     hBoxLayout = new QHBoxLayout();
     vBoxLayout = new QVBoxLayout();
 
     choosePicBtn = new QPushButton();
     exitBtn = new QPushButton();
-    exitToMainWidgetBtn = new QPushButton();
+    backMainWidBtn = new QPushButton();
 
     displayPicLabel = new QLabel();
 
@@ -22,7 +20,7 @@ ChoosePicWidget::ChoosePicWidget(QWidget *parent) : QWidget(parent)
     vBoxLayout->addWidget(displayOpenFileName);
     vBoxLayout->addWidget(choosePicBtn);
     vBoxLayout->addWidget(exitBtn);
-    vBoxLayout->addWidget(exitToMainWidgetBtn);
+    vBoxLayout->addWidget(backMainWidBtn);
 
 
     hBoxLayout->addWidget(displayPicLabel);
@@ -31,65 +29,41 @@ ChoosePicWidget::ChoosePicWidget(QWidget *parent) : QWidget(parent)
     this->setLayout(hBoxLayout);
 
 
-    this->setGeometry(250, 250, 1024, 500);
+    this->setGeometry(AXSIZE, AYSIZE, AWSIZE, AHSIZE);
     this->TranslateLanguage();
 
     QObject::connect(this->choosePicBtn, SIGNAL(clicked()), this, SLOT(choosePicture()));
     QObject::connect(this->exitBtn, SIGNAL(clicked()), this, SLOT(close()));
 
     //欲使信号直接驱动非槽函数，可以这样做！！！！！！
-    //QObject::connect(exitToMainWidgetBtn, SIGNAL(clicked()), this, SLOT(sendSignalsToReturnMainWidget()));
-    QObject::connect(exitToMainWidgetBtn, &QPushButton::clicked, this, &ChoosePicWidget::sendSignalsToReturnMainWidget);
+    //QObject::connect(backMainWidBtn, SIGNAL(clicked()), this, SLOT(ReturnMainWidget()));
+    QObject::connect(backMainWidBtn, &QPushButton::clicked, this, &ChoosePicWidget::ReturnMainWidget);
 }
 
 ChoosePicWidget::~ChoosePicWidget()
 {
-    if (nullptr != displayOpenFileName)
-    {
-        delete displayOpenFileName;
-    }
+    if (nullptr != displayOpenFileName) { delete displayOpenFileName; }
 
-    if (nullptr != showTextLabel)
-    {
-        delete showTextLabel;
-    }
+    if (nullptr != showTextLabel) { delete showTextLabel; }
 
-    if (nullptr != displayPicLabel)
-    {
-        delete displayPicLabel;
-    }
+    if (nullptr != displayPicLabel) { delete displayPicLabel; }
 
-    if (nullptr != exitToMainWidgetBtn)
-    {
-        delete exitToMainWidgetBtn;
-    }
+    if (nullptr != backMainWidBtn) { delete backMainWidBtn; }
 
-    if (nullptr != exitBtn)
-    {
-        delete exitBtn;
-    }
+    if (nullptr != exitBtn) { delete exitBtn; }
 
-    if (nullptr != choosePicBtn)
-    {
-        delete choosePicBtn;
-    }
+    if (nullptr != choosePicBtn) { delete choosePicBtn; }
 
-    if (nullptr != vBoxLayout)
-    {
-        delete vBoxLayout;
-    }
+    if (nullptr != vBoxLayout) { delete vBoxLayout; }
 
-    if (nullptr != hBoxLayout)
-    {
-        delete hBoxLayout;
-    }
+    if (nullptr != hBoxLayout) { delete hBoxLayout; }
 }
 
 void ChoosePicWidget::TranslateLanguage()
 {
     choosePicBtn->setText("Choose Picture");
     exitBtn->setText("Close Widget");
-    exitToMainWidgetBtn->setText("Go Back");
+    backMainWidBtn->setText("Go Back");
 
     displayPicLabel->setText("Waiting to Choose Picture ...");
 
@@ -99,7 +73,7 @@ void ChoosePicWidget::TranslateLanguage()
     return;
 }
 
-void ChoosePicWidget::sendSignalsToReturnMainWidget()
+void ChoosePicWidget::ReturnMainWidget()
 {
     emit mySignal();
     emit mySignalParm(SIGNAL_CHOOSE_WIDGET, "已经从ChoosePicWidget切换到主窗口");

@@ -6,37 +6,42 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
 
     cameraBtn = new QPushButton();
     choosePicBtn = new QPushButton();
+    picOperBtn = new QPushButton();
     countBtn = new QPushButton();
     exitBtn = new QPushButton();
 
-    //后续任务：
+/*后续任务：
 
-    //1、使窗口等比缩放拉伸！！！！！！！！
+    1、使窗口等比缩放拉伸！！！！！！！！
 
-    //2、目前cameraWidget是连同mainWidget创建而一起创建
-    //   后续看看可不可以放到goCameraWidget()中构造？？？？？？？？？？？
+    2、目前cameraWidget是连同mainWidget创建而一起创建
+       后续看看可不可以放到goCameraWidget()中构造？？？？？？？？？？？
 
-    //3、优化日志模块
+    3、优化日志模块
+
+    4、有没有必要设置窗口基类，设置些通用设置，例：窗口位置大小、···
+
+*/
 
     cameraWidget = new CameraWidget();
     pictureWidget = new ChoosePicWidget();
+    picOperationWidget = new pictureoperation();
 
     vBoxLayout->addWidget(cameraBtn);
     vBoxLayout->addWidget(choosePicBtn);
+    vBoxLayout->addWidget(picOperBtn);
     vBoxLayout->addWidget(countBtn);
     vBoxLayout->addWidget(exitBtn);
 
 
     this->setLayout(vBoxLayout);
-    this->setGeometry(250, 250, 1024, 500);
+    this->setGeometry(AXSIZE, AYSIZE, AWSIZE, AHSIZE);
     this->TranslateLanguage();
 
 
     QObject::connect(cameraBtn, SIGNAL(released()), this, SLOT(goCameraWidget()));
-
-    QObject::connect(exitBtn, SIGNAL(clicked()), this, SLOT(close()));
-
-    QObject::connect(choosePicBtn, SIGNAL(released()), this, SLOT(choosePicture()));
+    QObject::connect(choosePicBtn, SIGNAL(released()), this, SLOT(goChoosePicture()));
+    QObject::connect(picOperBtn, SIGNAL(released()), this, SLOT(goPictureOPerWidget()));
     //QObject::connect(choosePicBtn, SIGNAL(released()), exitBtn, SLOT(hide()));       //hide PushButton
 
     QObject::connect(countBtn, SIGNAL(clicked()), this, SLOT(clickedCount()));
@@ -48,13 +53,24 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     //pictureWidget窗口发到主页的信号
     QObject::connect(pictureWidget, SIGNAL(mySignal()), this, SLOT(returnMainWidget()));
     QObject::connect(pictureWidget, SIGNAL(mySignalParm(int, QString)), this, SLOT(returnMainWidgetParm(int, QString)));
+
+    QObject::connect(exitBtn, SIGNAL(clicked()), this, SLOT(close()));
+
+    //安装日志功能
+    qInstallMessageHandler(myMessageOutput);
 }
 
 MainWindow::~MainWindow()
-{    
+{
+    if (nullptr != picOperationWidget)
+    {
+        //qDebug() << "delete picOperationWidget";
+        delete picOperationWidget;
+    }
+
     if (nullptr != pictureWidget)
     {
-        //qDebug() << "delete cameraButton";
+        //qDebug() << "delete pictureWidget";
         delete pictureWidget;
     }
 
@@ -74,6 +90,12 @@ MainWindow::~MainWindow()
     {
         //qDebug() << "delete countBtn";
         delete countBtn;
+    }
+
+    if (nullptr != picOperBtn)
+    {
+        //qDebug() << "delete picOperBtn";
+        delete picOperBtn;
     }
 
     if (nullptr != choosePicBtn)
@@ -100,13 +122,14 @@ void MainWindow::TranslateLanguage()
     this->setWindowTitle(tr("MainWidget"));
     cameraBtn->setText("Camera Widget");
     choosePicBtn->setText("Choose Picture");
+    picOperBtn->setText("Picture Operation");
     countBtn->setText("Clicked Count");
     exitBtn->setText("Close Widget");
 
     return;
 }
 
-void MainWindow::choosePicture()
+void MainWindow::goChoosePicture()
 {
     if ( nullptr != choosePicBtn )
     {
@@ -127,11 +150,21 @@ void MainWindow::goCameraWidget()
     return;
 }
 
+void MainWindow::goPictureOPerWidget()
+{
+    this->hide();
+    picOperationWidget->show();
+
+    return;
+}
+
 void MainWindow::returnMainWidget()
 {
     this->show();
     cameraWidget->hide();
     pictureWidget->hide();
+
+    choosePicBtn->setText("Choose Picture");
 
     return;
 }

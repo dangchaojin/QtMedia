@@ -12,7 +12,7 @@ public:
     ~CameraWidget();
 
     void TranslateLanguage();
-    void sendSignalsToReturnMainWidget();
+    void ReturnMainWidget();
 
 protected:
 
@@ -42,7 +42,7 @@ private:
     QPushButton *captureBtn;
     QPushButton *saveBtn;
     QPushButton *exitBtn;
-    QPushButton *exitToMainWidgetBtn;
+    QPushButton *backMainWidBtn;
 
     QHBoxLayout *hBoxLayout;
     QVBoxLayout *vBoxLayout;

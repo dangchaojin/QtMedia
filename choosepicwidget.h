@@ -2,7 +2,6 @@
 #define CHOOSEPICWIDGET_H
 
 #include "common.h"
-#include "printfile.h"
 
 class ChoosePicWidget : public QWidget
 {
@@ -12,13 +11,13 @@ public:
     ~ChoosePicWidget();
 
     void TranslateLanguage();
-    void sendSignalsToReturnMainWidget();
 
 
 public slots:
 
 private slots:
     void choosePicture();
+    void ReturnMainWidget();
 
 
 signals:
@@ -32,7 +31,7 @@ private:
     QLabel *showTextLabel;
     QPushButton *choosePicBtn;
     QPushButton *exitBtn;
-    QPushButton *exitToMainWidgetBtn;
+    QPushButton *backMainWidBtn;
 
     QLabel *displayPicLabel;
 

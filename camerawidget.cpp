@@ -12,28 +12,27 @@ CameraWidget::CameraWidget(QWidget *parent) : QWidget(parent)
 
     showLabel = new QLabel();
     showLabel->setFixedSize(350, 350);
-    showLabel->setScaledContents(true);    //缩放内容！！
+    showLabel->setScaledContents(true);    //缩放内容!!!
 
     captureBtn = new QPushButton();
     saveBtn = new QPushButton();
     saveBtn->setDisabled(true);
     exitBtn = new QPushButton();
-    exitToMainWidgetBtn = new QPushButton();
+    backMainWidBtn = new QPushButton();
 
     vBoxLayout->addWidget(showLabel);
     vBoxLayout->addStretch(1);
     vBoxLayout->addWidget(captureBtn);
     vBoxLayout->addWidget(saveBtn);
     vBoxLayout->addWidget(exitBtn);
-    vBoxLayout->addWidget(exitToMainWidgetBtn);
+    vBoxLayout->addWidget(backMainWidBtn);
 
     hBoxLayout->addWidget(viewFinder);
     hBoxLayout->addStretch(1);
     hBoxLayout->addLayout(vBoxLayout);
 
     this->setLayout(hBoxLayout);
-    //QWidget::setGeometry(int ax, int ay, int aw, int ah)
-    this->setGeometry(250, 250, 1024, 500);
+    this->setGeometry(AXSIZE, AYSIZE, AWSIZE, AHSIZE);
     this->TranslateLanguage();
 
     QObject::connect(this->cameraImageCapture, SIGNAL(imageCaptured(int, QImage)), this, SLOT(DisplayImage(int, QImage)));
@@ -43,8 +42,8 @@ CameraWidget::CameraWidget(QWidget *parent) : QWidget(parent)
     QObject::connect(this->exitBtn, SIGNAL(clicked()), this, SLOT(close()));
 
     //欲使信号直接驱动非槽函数，可以这样做！！！！！！
-    //QObject::connect(exitToMainWidgetBtn, SIGNAL(clicked()), this, SLOT(sendSignalsToReturnMainWidget()));
-    QObject::connect(exitToMainWidgetBtn, &QPushButton::clicked, this, &CameraWidget::sendSignalsToReturnMainWidget);
+    //QObject::connect(backMainWidBtn, SIGNAL(clicked()), this, SLOT(ReturnMainWidget()));
+    QObject::connect(backMainWidBtn, &QPushButton::clicked, this, &CameraWidget::ReturnMainWidget);
 
 //    cameraImageCapture->setCaptureDestination(QCameraImageCapture::CaptureToFile);
 //    camera->setCaptureMode(QCamera::CaptureStillImage);
@@ -55,9 +54,9 @@ CameraWidget::CameraWidget(QWidget *parent) : QWidget(parent)
 CameraWidget::~CameraWidget()
 {
     //QObject及其派生类的对象，如果其parent非0，那么其parent析构时会析构该对象。
-    if (nullptr != exitToMainWidgetBtn)
+    if (nullptr != backMainWidBtn)
     {
-        delete exitToMainWidgetBtn;
+        delete backMainWidBtn;
     }
 
     if (nullptr != exitBtn)
@@ -115,12 +114,12 @@ void CameraWidget::TranslateLanguage() //TranslateLanguage
     captureBtn->setText("Capture Picture");
     saveBtn->setText("Save Picture");
     exitBtn->setText("Close Widget");
-    exitToMainWidgetBtn->setText("Go Back");
+    backMainWidBtn->setText("Go Back");
 
     return;
 }
 
-void CameraWidget::sendSignalsToReturnMainWidget()
+void CameraWidget::ReturnMainWidget()
 {
     emit mySignal();
     emit mySignalParm(SIGNAL_CAMERA_WIDGET, "已经从CameraWidget切换到主窗口");
