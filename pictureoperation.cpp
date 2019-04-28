@@ -33,7 +33,7 @@ void pictureoperation::ReturnMainWidget()
 
 void pictureoperation::TranslateLanguage()
 {
-    this->setWindowTitle("TestCapture");
+    this->setWindowTitle("Picture Operation");
     exitBtn->setText("Close Widget");
     backMainWidBtn->setText("Go Back");
 

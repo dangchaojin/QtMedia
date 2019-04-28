@@ -54,55 +54,25 @@ CameraWidget::CameraWidget(QWidget *parent) : QWidget(parent)
 CameraWidget::~CameraWidget()
 {
     //QObject及其派生类的对象，如果其parent非0，那么其parent析构时会析构该对象。
-    if (nullptr != backMainWidBtn)
-    {
-        delete backMainWidBtn;
-    }
+    if (nullptr != backMainWidBtn) { delete backMainWidBtn; }
 
-    if (nullptr != exitBtn)
-    {
-        delete exitBtn;
-    }
+    if (nullptr != exitBtn) { delete exitBtn; }
     //#define NULL ((void *)0)     所以用nullptr
-    if (nullptr != saveBtn)
-    {
-        delete saveBtn;
-    }
+    if (nullptr != saveBtn) { delete saveBtn; }
 
-    if (nullptr != captureBtn)
-    {
-        delete captureBtn;
-    }
+    if (nullptr != captureBtn) { delete captureBtn; }
 
-    if (nullptr != showLabel)
-    {
-        delete showLabel;
-    }
+    if (nullptr != showLabel) { delete showLabel; }
 
-    if (nullptr != cameraImageCapture)
-    {
-        delete cameraImageCapture;
-    }
+    if (nullptr != cameraImageCapture) { delete cameraImageCapture; }
 
-    if (nullptr != viewFinder)
-    {
-        delete viewFinder;
-    }
+    if (nullptr != viewFinder) { delete viewFinder; }
 
-    if (nullptr != camera)
-    {
-        delete camera;
-    }
+    if (nullptr != camera) { delete camera; }
 
-//    if (nullptr != hBoxLayout)
-//    {
-//        delete hBoxLayout;
-//    }
+//    if (nullptr != hBoxLayout) { delete hBoxLayout; }
 
-//    if (nullptr != vBoxLayout)
-//    {
-//        delete vBoxLayout;
-//    }
+//    if (nullptr != vBoxLayout) { delete vBoxLayout; }
     //两个boxlayout只能析构一个，出现两个运行时会报错“pure virtual method called”
     //这是因为  在基类析构函数中调用纯虚函数 ？？
 }

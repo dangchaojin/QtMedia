@@ -61,6 +61,7 @@ ChoosePicWidget::~ChoosePicWidget()
 
 void ChoosePicWidget::TranslateLanguage()
 {
+    this->setWindowTitle("Choose Picture");
     choosePicBtn->setText("Choose Picture");
     exitBtn->setText("Close Widget");
     backMainWidBtn->setText("Go Back");

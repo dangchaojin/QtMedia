@@ -119,7 +119,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::TranslateLanguage()
 {
-    this->setWindowTitle(tr("MainWidget"));
+    //this->setWindowTitle("MainWidget");   //不设置就已经显示QtMedia
     cameraBtn->setText("Camera Widget");
     choosePicBtn->setText("Choose Picture");
     picOperBtn->setText("Picture Operation");
