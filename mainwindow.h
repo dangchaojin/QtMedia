@@ -27,11 +27,12 @@ public slots:
     void goChoosePicture();
     void goCameraWidget();
     void goPictureOPerWidget();
+    void goShowLogWidget();
     void returnMainWidget();
     void returnMainWidgetParm(int, QString);
 
 private slots:
-    void clickedCount();
+    //void clickedCount();
 
 
 signals:
@@ -54,6 +55,7 @@ private:
     CameraWidget *cameraWidget;
     ChoosePicWidget *pictureWidget;
     pictureoperation *picOperationWidget;
+    QWidget *showLogWidget;
 
     int count = 0;
 };

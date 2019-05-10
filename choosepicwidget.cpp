@@ -12,7 +12,7 @@ ChoosePicWidget::ChoosePicWidget(QWidget *parent) : QWidget(parent)
     displayPicLabel = new QLabel();
 
     showTextLabel = new QLabel();
-    showTextLabel->setFixedSize(350, 350);
+    showTextLabel->setFixedSize(SHOW_LABEL_SIZE, SHOW_LABEL_SIZE);
 
     displayOpenFileName = new QLineEdit();
 
@@ -77,7 +77,7 @@ void ChoosePicWidget::TranslateLanguage()
 void ChoosePicWidget::ReturnMainWidget()
 {
     emit mySignal();
-    emit mySignalParm(SIGNAL_CHOOSE_WIDGET, "已经从ChoosePicWidget切换到主窗口");
+    emit mySignalParm(SIGNAL_CHOOSE_PIC_WIDGET, "已经从ChoosePicWidget切换到主窗口");
 
     return;
 }

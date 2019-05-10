@@ -21,11 +21,14 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
 
     4、有没有必要设置窗口基类，设置些通用设置，例：窗口位置大小、···
 
+    5、是否要做成选项统一在左边的，窗口右边展开的样式？？
+
 */
 
     cameraWidget = new CameraWidget();
     pictureWidget = new ChoosePicWidget();
     picOperationWidget = new pictureoperation();
+    showLogWidget = new QWidget();
 
     vBoxLayout->addWidget(cameraBtn);
     vBoxLayout->addWidget(choosePicBtn);
@@ -42,9 +45,10 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     QObject::connect(cameraBtn, SIGNAL(released()), this, SLOT(goCameraWidget()));
     QObject::connect(choosePicBtn, SIGNAL(released()), this, SLOT(goChoosePicture()));
     QObject::connect(picOperBtn, SIGNAL(released()), this, SLOT(goPictureOPerWidget()));
-    //QObject::connect(choosePicBtn, SIGNAL(released()), exitBtn, SLOT(hide()));       //hide PushButton
+    QObject::connect(countBtn, SIGNAL(released()), this, SLOT(goShowLogWidget()));
 
-    QObject::connect(countBtn, SIGNAL(clicked()), this, SLOT(clickedCount()));
+    //QObject::connect(choosePicBtn, SIGNAL(released()), exitBtn, SLOT(hide()));       //hide PushButton
+    //QObject::connect(countBtn, SIGNAL(clicked()), this, SLOT(clickedCount()));
 
     //cameraWidget窗口发到主页的信号
     QObject::connect(cameraWidget, SIGNAL(mySignal()), this, SLOT(returnMainWidget()));
@@ -62,6 +66,12 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
 
 MainWindow::~MainWindow()
 {
+    if (nullptr != showLogWidget)
+    {
+        //qDebug() << "delete showLogWidget";
+        delete showLogWidget;
+    }
+
     if (nullptr != picOperationWidget)
     {
         //qDebug() << "delete picOperationWidget";
@@ -76,7 +86,7 @@ MainWindow::~MainWindow()
 
     if (nullptr != cameraWidget)
     {
-        //qDebug() << "delete cameraButton";
+        //qDebug() << "delete cameraWidget";
         delete cameraWidget;
     }
 
@@ -106,13 +116,13 @@ MainWindow::~MainWindow()
 
     if (nullptr != cameraBtn)
     {
-        //qDebug() << "delete cameraButton";
+        //qDebug() << "delete cameraBtn";
         delete cameraBtn;
     }
 
     if (nullptr != vBoxLayout)
     {
-        //qDebug() << "delete hBoxLayout";
+        //qDebug() << "delete vBoxLayout";
         delete vBoxLayout;
     }
 }
@@ -123,7 +133,7 @@ void MainWindow::TranslateLanguage()
     cameraBtn->setText("Camera Widget");
     choosePicBtn->setText("Choose Picture");
     picOperBtn->setText("Picture Operation");
-    countBtn->setText("Clicked Count");
+    countBtn->setText("Show Log");
     exitBtn->setText("Close Widget");
 
     return;
@@ -158,6 +168,14 @@ void MainWindow::goPictureOPerWidget()
     return;
 }
 
+void MainWindow::goShowLogWidget()
+{
+    this->hide();
+    showLogWidget->show();
+
+    return;
+}
+
 void MainWindow::returnMainWidget()
 {
     this->show();
@@ -171,31 +189,37 @@ void MainWindow::returnMainWidget()
 
 void MainWindow::returnMainWidgetParm(int num, QString str)
 {
-    if (num == SIGNAL_CAMERA_WIDGET)
+    switch (num)
     {
+    case SIGNAL_CAMERA_WIDGET:
         qDebug() << "从cameraWidget传回的参数 : " << "num: " << num << " str: " << str.toUtf8().data();
 //        qDebug() << "num: " << num << " str: " << str.toStdString().c_str();
 //        qWarning() << "num: " << num << " str: " << str.toUtf8().data();
 //        qInfo() << "num: " << num << " str: " << str.toUtf8().data();
-    }
-    else if (num == SIGNAL_CHOOSE_WIDGET)
-    {
+        break;
+
+    case SIGNAL_CHOOSE_PIC_WIDGET:
         qDebug() << "从pictureWidget传回的参数 : " << "num: " << num << " str: " << str.toUtf8().data();
-    }
-    else
-    {
-        qDebug() << "----------------------------";
+        break;
+
+    case SIGNAL_PIC_OPER_WIDGET:
+        qDebug() << "从picOperationWidget传回的参数 : " << "num: " << num << " str: " << str.toUtf8().data();
+        break;
+
+    case SIGNAL_SHOWLOG_WIDGET:
+        qDebug() << "从showLogWidget传回的参数 : " << "num: " << num << " str: " << str.toUtf8().data();
+        break;
+    default:
+        qDebug() << "the post num id invaild: " << num << "str: " << str.toUtf8().data();
     }
 
     return;
 }
 
-void MainWindow::clickedCount()
+/*void MainWindow::clickedCount()
 {
     count++;
-    //countBtn->setText(QString::fromLocal8Bit("点击次数") + QString::number(count));
     countBtn->setText("点击次数 :" + QString::number(count));
     qDebug() << "这是一个Lambda表达式测试输出";
-
     return;
-}
+}*/

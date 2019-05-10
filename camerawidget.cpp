@@ -11,7 +11,7 @@ CameraWidget::CameraWidget(QWidget *parent) : QWidget(parent)
     cameraImageCapture = new QCameraImageCapture(camera);
 
     showLabel = new QLabel();
-    showLabel->setFixedSize(350, 350);
+    showLabel->setFixedSize(SHOW_LABEL_SIZE, SHOW_LABEL_SIZE);
     showLabel->setScaledContents(true);    //缩放内容!!!
 
     captureBtn = new QPushButton();
