@@ -33,11 +33,11 @@ ChoosePicWidget::ChoosePicWidget(QWidget *parent) : QWidget(parent)
     this->TranslateLanguage();
 
     QObject::connect(this->choosePicBtn, SIGNAL(clicked()), this, SLOT(choosePicture()));
-    QObject::connect(this->exitBtn, SIGNAL(clicked()), this, SLOT(close()));
 
     //欲使信号直接驱动非槽函数，可以这样做！！！！！！
     //QObject::connect(backMainWidBtn, SIGNAL(clicked()), this, SLOT(ReturnMainWidget()));
     QObject::connect(backMainWidBtn, &QPushButton::clicked, this, &ChoosePicWidget::ReturnMainWidget);
+    QObject::connect(this->exitBtn, SIGNAL(clicked()), this, SLOT(close()));
 }
 
 ChoosePicWidget::~ChoosePicWidget()
@@ -76,6 +76,7 @@ void ChoosePicWidget::TranslateLanguage()
 
 void ChoosePicWidget::ReturnMainWidget()
 {
+    qDebug() << "from picChooseWidget to MainWidget";
     emit mySignal();
     emit mySignalParm(SIGNAL_CHOOSE_PIC_WIDGET, "已经从ChoosePicWidget切换到主窗口");
 

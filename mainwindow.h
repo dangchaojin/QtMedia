@@ -4,7 +4,8 @@
 #include "printfile.h"
 #include "camerawidget.h"
 #include "choosepicwidget.h"
-#include "pictureoperation.h"
+#include "picoperwidget.h"
+#include "otheroperwidget.h"
 
 class MainWindow : public QWidget
 {
@@ -24,10 +25,11 @@ private:
  * 类型，顺序必须要和对应的信号保持一致。另外，槽函数的参数不能有缺省值。
  * 由于信号的返回值为void, 槽必须和信号的返回值保持一致, 因此槽的返回值为void      */
 public slots:
-    void goChoosePicture();
     void goCameraWidget();
-    void goPictureOPerWidget();
-    void goShowLogWidget();
+    void goChoosePicture();
+    void goPicOPerWidget();
+    void goOtherOperWidget();
+
     void returnMainWidget();
     void returnMainWidgetParm(int, QString);
 
@@ -49,15 +51,15 @@ private:
     QPushButton *cameraBtn;
     QPushButton *choosePicBtn;
     QPushButton *picOperBtn;
-    QPushButton *countBtn;
+    QPushButton *otherOperBtn;
     QPushButton *exitBtn;
 
     CameraWidget *cameraWidget;
-    ChoosePicWidget *pictureWidget;
-    pictureoperation *picOperationWidget;
-    QWidget *showLogWidget;
+    ChoosePicWidget *picChooseWidget;
+    PicOperWidget *picOperWidget;
+    OtherOperWidget *otherOperWidget;
 
-    int count = 0;
+    //int count = 0;
 };
 
 #endif // MAINWINDOW_H

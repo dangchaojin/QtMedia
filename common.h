@@ -4,7 +4,7 @@
 #define SIGNAL_CAMERA_WIDGET       1
 #define SIGNAL_CHOOSE_PIC_WIDGET   2
 #define SIGNAL_PIC_OPER_WIDGET     3
-#define SIGNAL_SHOWLOG_WIDGET      4
+#define SIGNAL_OTHER_OPER_WIDGET   4
 
 #define AXSIZE 250
 #define AYSIZE 250
@@ -13,7 +13,7 @@
 
 #define SHOW_LABEL_SIZE 350
 
-#define SOFT_VERSION "QtMedia_dcj_1.0"
+#define SOFT_VERSION "QtMedia dcj_1.0"
 
 #include <QWidget>
 #include <QLabel>

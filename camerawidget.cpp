@@ -39,11 +39,11 @@ CameraWidget::CameraWidget(QWidget *parent) : QWidget(parent)
 
     QObject::connect(this->captureBtn, SIGNAL(clicked()), this, SLOT(CaptureImage()));
     QObject::connect(this->saveBtn, SIGNAL(clicked()), this, SLOT(SaveImage()));
-    QObject::connect(this->exitBtn, SIGNAL(clicked()), this, SLOT(close()));
 
     //欲使信号直接驱动非槽函数，可以这样做！！！！！！
     //QObject::connect(backMainWidBtn, SIGNAL(clicked()), this, SLOT(ReturnMainWidget()));
     QObject::connect(backMainWidBtn, &QPushButton::clicked, this, &CameraWidget::ReturnMainWidget);
+    QObject::connect(this->exitBtn, SIGNAL(clicked()), this, SLOT(close()));
 
 //    cameraImageCapture->setCaptureDestination(QCameraImageCapture::CaptureToFile);
 //    camera->setCaptureMode(QCamera::CaptureStillImage);
@@ -91,15 +91,15 @@ void CameraWidget::TranslateLanguage() //TranslateLanguage
 
 void CameraWidget::ReturnMainWidget()
 {
+    qDebug() << "from cameraWidget to MainWidget";
     emit mySignal();
     emit mySignalParm(SIGNAL_CAMERA_WIDGET, "已经从CameraWidget切换到主窗口");
-
     return;
 }
 
 void CameraWidget::DisplayImage(int, QImage image)   //参数用不到可以这样！！
 {
-    qDebug() << "DisplayImage1";
+    qDebug() << "DisplayImage";
     showLabel->setPixmap(QPixmap::fromImage(image));
 
     return;
