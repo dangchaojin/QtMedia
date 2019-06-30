@@ -2,6 +2,7 @@
 #define CAMERAWIDGET_H
 
 #include "common.h"
+#include "popupwidget.h"
 
 class CameraWidget : public QWidget
 {

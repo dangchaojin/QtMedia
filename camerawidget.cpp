@@ -129,6 +129,7 @@ void CameraWidget::SaveImage()
 		QMessageBox messageBox(QMessageBox::NoIcon, "Save Fail", "FileName is empty!");
         //messageBox.setIconPixmap(QPixmap("icon.png"));
         messageBox.exec();
+
 		return;    //!!!!注意  其他的类似这个if的情况，避免此时错误执行后面的代码
     }
 	
@@ -136,8 +137,16 @@ void CameraWidget::SaveImage()
     if (pixmap)
     {
         pixmap->save(fileName);
-        QMessageBox messageBox(QMessageBox::NoIcon, "Succeed", "Save succeed!");
-        messageBox.exec();
+
+//        QMessageBox messageBox(QMessageBox::NoIcon, "Succeed", "Save succeed!");
+//        messageBox.exec();
+
+        qDebug() << "save file!!!";
+        PopupWidget popupwdg(TipsType_Ok, "22222", this);
+        popupwdg.setAttribute(Qt::WA_ShowModal, true);          //whis this
+        popupwdg.startTimer(3000);
+        popupwdg.exec();
+        qDebug() << "pop up widget ok";
     }
     else
     {

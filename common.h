@@ -16,6 +16,7 @@
 #define SOFT_VERSION "QtMedia dcj_1.0"
 
 #include <QWidget>
+#include <QDialog>
 #include <QLabel>
 #include <QPushButton>
 #include <QHBoxLayout>
@@ -44,7 +45,7 @@
 #include <QFile>
 #include <QFileInfo>
 
-
+#include <QTimer>
 
 
 #endif // COMMON_H

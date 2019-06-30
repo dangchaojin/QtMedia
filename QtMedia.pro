@@ -30,7 +30,8 @@ SOURCES += \
     choosepicwidget.cpp \
     printfile.cpp \
     otheroperwidget.cpp \
-    picoperwidget.cpp
+    picoperwidget.cpp \
+    popupwidget.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,7 +40,8 @@ HEADERS += \
     common.h \
     printfile.h \
     otheroperwidget.h \
-    picoperwidget.h
+    picoperwidget.h \
+    popupwidget.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
