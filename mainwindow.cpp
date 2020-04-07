@@ -11,12 +11,19 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     exitBtn = new QPushButton();
 
 /*后续任务：
-    1、使窗口等比缩放拉伸！！！！！！！！
-    2、目前cameraWidget是连同mainWidget创建而一起创建
+    1、设置监听端口！！！  设置配置文件！！！ 设置api查看静态信息！！！
+	   配置是否可以使用telnet进后台
+	
+    2、使窗口等比缩放拉伸！！！！！！！！
+
+    3、目前cameraWidget是连同mainWidget创建而一起创建
        后续看看可不可以放到goCameraWidget()中构造？？？？？？？？？？？
-    3、优化日志模块
-    4、有没有必要设置窗口基类，设置些通用设置，例：窗口位置大小、···
-    5、是否要做成选项统一在左边的，窗口右边展开的样式？？
+	
+	4、优化日志模块
+	
+	5、增加一个页面，把日志动态显示在页面上
+
+    6、是否要做成选项统一在左边的，窗口右边展开的样式？？
 */
 
     cameraWidget = new CameraWidget();
