@@ -13,7 +13,7 @@ echo.
 :: 显示乱码的另存为ANSI编码
 :: xcopy 有询问的拷贝
 
-@echo on
+::@echo on
 ::打开回显
 
 copy D:\Qt5.12.0\5.12.0\mingw73_64\bin\Qt5Guid.dll                D:\Test_Code\QtMedia\debug
