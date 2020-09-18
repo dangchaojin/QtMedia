@@ -20,6 +20,8 @@ a Demo of QtCamera
 
 如需直接运行，到Qt5.12.0\5.12.0\mingw73_64\bin中拷贝以下几个动态链接库文件：
 
+git:    git clone https://github.com/dangchaojin/QtMedia
+
 Qt5Guid.dll
 Qt5Cored.dll
 Qt5OpenGLd.dll
