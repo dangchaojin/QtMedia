@@ -1,14 +1,14 @@
+/*
+ *在实际开发中，我们会有这样一种需求，一个提示框，用户可以手动关闭，或者在用户没有操作的情况下，显示3秒钟然后自动关闭，这样应该怎样做呢？
+  我们的思路应该是这样的：
+  1.对话框构造函数里，设置一个定时器
+  2.定时器槽函数设置为close()
+ */
+
 #ifndef POPUPWIDGET_H
 #define POPUPWIDGET_H
 
 #include "common.h"
-
-enum TipsType
-{
-    TipsType_Unknown = 0,
-    TipsType_Warnning = 1,       //警告
-    TipsType_Ok = 2              //成功
-};
 
 class PopupWidget : public QDialog
 {

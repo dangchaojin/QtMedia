@@ -2,6 +2,7 @@
 #define OTHEROPERWIDGET_H
 
 #include "common.h"
+#include "popupwidget.h"
 
 class OtherOperWidget : public QWidget
 {
@@ -19,12 +20,14 @@ public slots:
 
 private slots:
     void ReturnMainWidget();
+    void ShowDialog();
 
 private:
     void TranslateLanguage();
 
 private:
     QVBoxLayout *vBoxLayout;
+    QPushButton *showDlgBtn;
     QPushButton *exitBtn;
     QPushButton *backMainWidBtn;
 };

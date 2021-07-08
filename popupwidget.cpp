@@ -2,7 +2,7 @@
 
 PopupWidget::PopupWidget(TipsType type, const QString &msg, QWidget *parent) : QDialog (parent), m_type(type)
 {
-    setWindowFlags(Qt::FramelessWindowHint | Qt::Tool |Qt::WindowStaysOnTopHint);          //whis this
+//    setWindowFlags(Qt::FramelessWindowHint | Qt::Tool |Qt::WindowStaysOnTopHint);          //whis this
     setAttribute(Qt::WA_TranslucentBackground);          //whis this
 
     this->initFrame(msg);

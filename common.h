@@ -48,4 +48,12 @@
 #include <QTimer>
 
 
+enum TipsType
+{
+    TipsType_Unknown =          0,
+    TipsType_Warnning =         1,//警告
+    TipsType_Ok =               2//成功
+};
+
+
 #endif // COMMON_H
